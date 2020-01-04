@@ -1,23 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
 
-import { HomePage } from './home.page';
+import { IonicModule } from '@ionic/angular';
+
+import { FilmsDetailPageRoutingModule } from './films-detail-routing.module';
+
+import { FilmsDetailPage } from './films-detail.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: HomePage
-      }
-    ])
+    FilmsDetailPageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [FilmsDetailPage]
 })
-export class HomePageModule {}
+export class FilmsDetailPageModule {}
