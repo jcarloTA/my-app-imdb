@@ -1,6 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>films</ion-title>
+    <ion-buttons slot="start" *ngIf="!props.activeSearch">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="!props.activeSearch">Peliculas</ion-title>
+    <ion-buttons slot="secondary" *ngIf="!props.activeSearch">
+        <ion-button (click)="setVisibleSearch()">
+          <ion-icon slot="icon-only" name="search" ></ion-icon>
+        </ion-button>
+        <ion-button>
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-searchbar 
+      *ngIf="props.activeSearch" 
+      animated
+      showCancelButton="always" 
+      cancelButtonText="Cancelar"
+      (ionCancel)="ionCancelSearch()"
+      placeholder="Buscar Peliculas"
+      debounce="500">
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 

@@ -1,0 +1,48 @@
+
+.fav-container {
+    position: absolute;
+    right: 0;
+    background-color: rgba($color: #000000, $alpha: .5);
+    border-radius: 0 0 0 10px;
+    ion-icon {
+        font-size: 2.5em;
+    }
+}
+
+.fil-item-container {
+    overflow: visible;
+    .img-container {
+        width: 100%;
+        min-height: 14em;
+    }
+}
+
+.fab-container {
+    ion-fab-button {
+        width: 30px;
+        height: 30px;
+       
+    }
+    ion-fab-list{
+        margin-bottom: 35px;
+    }
+    ion-fab[vertical="bottom"][horizontal="end"] ion-fab-list {
+        right: 0;
+        align-items: flex-end;
+    }
+    ion-fab-button[size="small"] {
+        --size: 32px;
+        margin: 0;
+    }
+    .custom-fab {
+        display: flex;
+        align-items: center;
+    }
+    .custom-fab ion-button {
+        --height: 25px;
+        --padding-start: 0;
+        --padding-end: 0;
+        font-size: .7rem;
+        text-transform: none;
+    }
+}

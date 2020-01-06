@@ -1,0 +1,35 @@
+ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+    --border-width: 0;
+}
+ion-header {
+    --border-width: 0;
+}
+.inner-scroll, ion-content{
+    --padding-top: 0;
+}
+
+.cover-page {
+    height: 35vh;
+    width: 100%;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.container-content {
+    padding: 1em;
+    margin-top: -2em;
+    position: absolute;
+    border-radius: 20px 20px 0 0;
+    background-color: var(--ion-color-light);
+    height: 65vh;
+    box-shadow: 2px -9px 21px -5px rgba(0,0,0,0.75);
+    position: relative;    
+}
+.footer-content {
+    position: absolute;
+    bottom: 4em;
+}
+

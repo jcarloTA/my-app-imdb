@@ -1,12 +1,45 @@
-<ion-card>
-  <img src="https://http2.mlstatic.com/posters-alita-battle-angel-2019-42x30-cm-D_NQ_NP_609775-MLA29360398780_022019-F.jpg" />
+<ion-card class="fil-item-container">
+  <div class="fav-container">
+    <ion-icon name="heart-empty" color="dark"></ion-icon>
+  </div>
+  <div class="img-container">
+    <img src="https://http2.mlstatic.com/posters-alita-battle-angel-2019-42x30-cm-D_NQ_NP_609775-MLA29360398780_022019-F.jpg" />
+  </div>
   <ion-card-header>
-    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-    <ion-card-title>Card Title</ion-card-title>
+    <ion-card-title>Card Title asdf asdfasdfas</ion-card-title>
+    <ion-card-subtitle>2016</ion-card-subtitle>
+
+
   </ion-card-header>
 
   <ion-card-content>
+    <div class="stars-container">
+        <ion-icon name="star" color="warning"></ion-icon>
+        <span>7.5</span>
+    </div>
     Keep close to Nature's heart... and break clear away, once in awhile,
     and climb a mountain or spend a week in the woods. Wash your spirit clean.
+
+    <div class="fab-container">
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button>
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="top">
+                <div class="custom-fab">
+                  <ion-button>
+                    Agregar para ver despues
+                    <ion-icon name="bookmark"></ion-icon>
+                  </ion-button>
+                </div>
+                <div class="custom-fab">
+                  <ion-button>
+                    Otra opcion
+                    <ion-icon name="bookmark"></ion-icon>
+                  </ion-button>
+                </div>
+            </ion-fab-list>
+        </ion-fab>
+      </div>
   </ion-card-content>
 </ion-card>

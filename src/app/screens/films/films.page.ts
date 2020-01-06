@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilmsPage implements OnInit {
 
+  props = {
+    activeSearch: false
+  }
   constructor() { }
 
   ngOnInit() {
   }
 
+  setVisibleSearch() {
+    this.props.activeSearch = !this.props.activeSearch;
+  }
+
+  ionCancelSearch() {
+    this.setVisibleSearch()
+  }
+  
 }
