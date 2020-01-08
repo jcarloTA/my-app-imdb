@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-films',
@@ -10,9 +12,13 @@ export class FilmsPage implements OnInit {
   props = {
     activeSearch: false
   }
-  constructor() { }
+  constructor( 
+    private authService: AuthService) {
+
+   }
 
   ngOnInit() {
+    //this.authService.generateRequestToken()
   }
 
   setVisibleSearch() {
