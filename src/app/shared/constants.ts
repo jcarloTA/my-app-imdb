@@ -4,7 +4,9 @@ export const storageKeys = {
     reqTokenExpiration: 'reqTokenExp',
     dateToken: 'dateToken',
     isValidReqToken: 'isValidReqToken',
-    moviesList: 'moviesList'
+    moviesList: 'moviesList',
+    sessionId: 'sessionId',
+    account: 'account'
 }
 
 export const imagesConfig = {

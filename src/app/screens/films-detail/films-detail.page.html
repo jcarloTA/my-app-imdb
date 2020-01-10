@@ -8,6 +8,10 @@
 
 <ion-content fullscreen>
   <div class="cover-page" fullscreen [style.background-image]="'url('+details.poster_path+')'">
+    <div class="fav-container" (click)="markAsFavorite(!movieState.favorite)">
+      <ion-icon name="heart-empty" *ngIf="!movieState.favorite" color="dark"></ion-icon>
+      <ion-icon name="heart" *ngIf="movieState.favorite"  color="dark"></ion-icon>
+    </div>
   </div>
   <div class="container-content">
     <ion-card-title>{{details.title}}</ion-card-title>
@@ -21,9 +25,13 @@
     </div>
     <p>{{details.overview}}</p>
     <div class="footer-content">
-      <ion-button>
+      <ion-button (click)="addMyWatchList(!movieState.watchlist)" *ngIf="!movieState.watchlist">
           <ion-icon slot="start" name="add"></ion-icon>
           Añadir a la lista ver despues
+      </ion-button>
+      <ion-button (click)="addMyWatchList(!movieState.watchlist)" *ngIf="movieState.watchlist" color="medium">
+          <ion-icon slot="start" name="close"></ion-icon>
+          Quitar de mi lista
       </ion-button>
     </div>
   </div>

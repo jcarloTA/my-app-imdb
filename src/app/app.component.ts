@@ -56,17 +56,31 @@ export class AppComponent {
     let reqTokenExpiration = await this.storageService.getItem(storageKeys.reqTokenExpiration);
     let dateToken = await this.storageService.getItem(storageKeys.dateToken);
     let isValidReqToken = await this.storageService.getItem(storageKeys.isValidReqToken);
+    let account = await this.storageService.getItem(storageKeys.account);
+    let sessionId = await this.storageService.getItem(storageKeys.sessionId);
     
-    if(isValidReqToken) {
-      let difference = new Date().getTime() - new Date(dateToken).getTime();
-      let differenceInMinutes = Math.round(difference / 60000);
-      if(isValidReqToken && differenceInMinutes >= environment.TOKEN_DURATION) {
+    console.log('sessionId',sessionId);
+    console.log('account',account);
+    console.log('reqToken',reqToken);
+    if (sessionId ) {
         this.authService.requestToken = reqToken;
         this.authService.rtoken_expire_at = reqTokenExpiration;
         this.authService.dateToken = dateToken;
         this.authService.isValidRequestToken = isValidReqToken;
-      }
+        this.authService.account = account;
+        this.authService.sessionId = sessionId;
     }
+
+    // if(isValidReqToken) {
+    //   let difference = new Date().getTime() - new Date(dateToken).getTime();
+    //   let differenceInMinutes = Math.round(difference / 60000);
+    //   if(isValidReqToken && differenceInMinutes >= environment.TOKEN_DURATION) {
+    //     this.authService.requestToken = reqToken;
+    //     this.authService.rtoken_expire_at = reqTokenExpiration;
+    //     this.authService.dateToken = dateToken;
+    //     this.authService.isValidRequestToken = isValidReqToken;
+    //   }
+    // }
     
   }
 }

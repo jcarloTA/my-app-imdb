@@ -6,6 +6,7 @@ import Movie from 'src/app/models/movie.model';
 import { StorageService } from '../storage/storage.service';
 import { storageKeys, imagesConfig } from './../../shared/constants'
 import { environment } from './../../../environments/environment'
+import { AuthService } from '../auth/auth.service';
 interface responseData {
   page: Number,
   total_results: Number;
@@ -25,7 +26,8 @@ export class FilmsService {
 
   constructor(
     private httpService: HttpService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private authService: AuthService
   ) { 
     this.page = 0;
     this.moviesList = [];
@@ -59,6 +61,33 @@ export class FilmsService {
     )
   }
 
+  markAsFavorite(body) {
+    return this.httpService.post(`/3/account/${this.authService.account.id}/favorite`,body, {session_id: this.authService.sessionId});
+  }
+  addMyWatchList(body){
+    return this.httpService.post(`/3/account/${this.authService.account.id}/watchlist`,body, {session_id: this.authService.sessionId});
+  }
+  getMovieState(movieId) :any {
+    if(!this.authService.account) {
+      return this.authService.generateRequestToken()
+    }
+    return this.httpService.get(`/3/movie/${movieId}/account_states`, {session_id:  this.authService.sessionId });
+  }
+
+  getMyFavoritesMovies() {
+    if(!this.authService.account) {
+      return this.authService.generateRequestToken()
+    }
+    return this.httpService.get(`account/${this.authService.account.id}/watchlist/movies`, {session_id: this.authService.sessionId, language: environment.LANGUAGE})
+  }
+
+  getMyWatchlist() {
+    if(!this.authService.account) {
+      return this.authService.generateRequestToken()
+    }
+    return this.httpService.get(`account/${this.authService.account.id}/favorite/movies`, {session_id: this.authService.sessionId, language: environment.LANGUAGE})
+  }
+
   get moviesList() {
     return this._moviesList;
   }
@@ -84,7 +113,7 @@ export class FilmsService {
     return movies
   }
 
-  async saveMoviesOnStorage(movies) {
+  async saveMoviesOnStorage() {
     return this.storageService.setItem(storageKeys.moviesList, {
       page: this.page,
       movies: this.moviesList,

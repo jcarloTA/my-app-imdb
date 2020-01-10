@@ -1,7 +1,4 @@
 <ion-card class="fil-item-container">
-  <div class="fav-container">
-    <ion-icon name="heart-empty" color="dark"></ion-icon>
-  </div>
   <div class="img-container">
     <img [src]="movie.poster_path" [routerDirection]="'root'" [routerLink]="['/films/details/'+movie.id]"/>
   </div>
@@ -25,12 +22,6 @@
                 <div class="custom-fab">
                   <ion-button>
                     Agregar para ver despues
-                    <ion-icon name="bookmark"></ion-icon>
-                  </ion-button>
-                </div>
-                <div class="custom-fab">
-                  <ion-button>
-                    Otra opcion
                     <ion-icon name="bookmark"></ion-icon>
                   </ion-button>
                 </div>
