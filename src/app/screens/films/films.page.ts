@@ -29,7 +29,7 @@ export class FilmsPage implements OnInit {
     //this.authService.generateRequestToken()
   }
 
-  async getMoviesList(scrollEvent,isInitial, refresh?) {
+  async getMoviesList(scrollEvent,isInitial?, refresh?) {
     let obsFimls:any = await this.vm.filmsService.getMoviesList(isInitial);
     obsFimls.subscribe(
       (res:any) => {
