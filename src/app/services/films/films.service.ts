@@ -81,14 +81,14 @@ export class FilmsService {
     if(!this.authService.account) {
       return this.authService.generateRequestToken()
     }
-    return this.httpService.get(`account/${this.authService.account.id}/watchlist/movies`, {session_id: this.authService.sessionId, language: environment.LANGUAGE})
+    return this.httpService.get(`/account/${this.authService.account.id}/watchlist/movies`, {session_id: this.authService.sessionId, language: environment.LANGUAGE})
   }
 
   getMyWatchlist() {
     if(!this.authService.account) {
       return this.authService.generateRequestToken()
     }
-    return this.httpService.get(`account/${this.authService.account.id}/favorite/movies`, {session_id: this.authService.sessionId, language: environment.LANGUAGE})
+    return this.httpService.get(`/account/${this.authService.account.id}/favorite/movies`, {session_id: this.authService.sessionId, language: environment.LANGUAGE})
   }
 
   get moviesList() {
