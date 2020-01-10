@@ -7,12 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: FilmsPage,
-    children: [
-      {
-        path: 'detail/:id',
-        loadChildren: './../films-detail/films-detail.module#FilmsDetailPageModule'
-      }
-    ]
   }
 ];
 

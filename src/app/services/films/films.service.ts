@@ -36,7 +36,8 @@ export class FilmsService {
   }
 
   async getMoviesList(isInitial?) {
-    if(isInitial) {
+    if (isInitial) {
+      this.moviesList = [];
       let storageMovies = await this.storageService.getItem(storageKeys.moviesList);
       if(storageMovies && storageMovies.movies.length > 0 ) {
         this.page = storageMovies.page;

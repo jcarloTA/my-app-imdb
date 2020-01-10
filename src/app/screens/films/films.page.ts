@@ -11,7 +11,7 @@ import Movie from 'src/app/models/movie.model';
 export class FilmsPage implements OnInit {
 
   props = {
-    activeSearch: false
+    activeSearch: false,
   }
   public vm : {
     filmsService?: FilmsService
@@ -29,7 +29,7 @@ export class FilmsPage implements OnInit {
     //this.authService.generateRequestToken()
   }
 
-  async getMoviesList(scrollEvent,isInitial) {
+  async getMoviesList(scrollEvent,isInitial, refresh?) {
     let obsFimls:any = await this.vm.filmsService.getMoviesList(isInitial);
     obsFimls.subscribe(
       (res:any) => {
@@ -42,6 +42,9 @@ export class FilmsPage implements OnInit {
         if(scrollEvent) {
           scrollEvent.target.complete();
         }
+        if (refresh) {
+          refresh.target.complete();
+        }
       }
     ) 
   }
@@ -53,5 +56,8 @@ export class FilmsPage implements OnInit {
   ionCancelSearch() {
     this.setVisibleSearch()
   }
-  
+  doRefresh(eventRefresh) {
+    this.vm.filmsService.page = 0;
+    this.getMoviesList(null, true, eventRefresh);
+  }
 }

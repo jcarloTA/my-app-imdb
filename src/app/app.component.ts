@@ -8,6 +8,7 @@ import { StorageService } from './services/storage/storage.service';
 
 import { environment } from './../environments/environment'
 import { AuthService } from './services/auth/auth.service';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,33 +16,17 @@ import { AuthService } from './services/auth/auth.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  public appPages = [
-    {
-      title: 'Peliculas',
-      url: '/films',
-      icon: 'film'
-    },
-    {
-      title: 'Peliculas Favoritas',
-      url: '/favorite-movies',
-      icon: 'heart'
-    },
-    {
-      title: 'Ver despues',
-      url: '/watch-later',
-      icon: 'play'
-    },
-  ];
+
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private storageService: StorageService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
     this.initializeApp();
-  }
+  } 
 
   initializeApp() {
     this.platform.ready().then(() => {

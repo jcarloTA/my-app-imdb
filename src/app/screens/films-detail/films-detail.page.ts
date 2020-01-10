@@ -3,6 +3,7 @@ import Movie from 'src/app/models/movie.model';
 import { ActivatedRoute } from '@angular/router';
 import { FilmsService } from 'src/app/services/films/films.service';
 import { MessagesService } from 'src/app/services/messages/messages.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-films-detail',
@@ -17,7 +18,9 @@ export class FilmsDetailPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private filmsService: FilmsService,
-    private messagesService: MessagesService
+    private messagesService: MessagesService,
+    public navCtrl: NavController,
+
   ) {
 
 
@@ -76,5 +79,9 @@ export class FilmsDetailPage implements OnInit {
         this.messagesService.presentToast('Removido de mi lista')
       }
     })
+  }
+
+  back() {
+    this.navCtrl.back();
   }
 }

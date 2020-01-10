@@ -1,6 +1,6 @@
 <ion-card class="fil-item-container">
   <div class="img-container">
-    <img [src]="movie.poster_path" [routerDirection]="'root'" [routerLink]="['details/'+movie.id]"/>
+    <img [src]="movie.poster_path" expand="full" [routerDirection]="'root'" [routerLink]="['/menu/detail/'+movie.id]"/>
   </div>
   <ion-card-header>
     <ion-card-title>{{movie.original_title}}</ion-card-title>

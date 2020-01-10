@@ -21,7 +21,7 @@ export class WatchLaterPage implements OnInit {
     this.getWatcherList();
   }
 
-  async getWatcherList() {
+  async getWatcherList(eventRefresh?) {
     let obsFimls:any = await this.vm.filmsService.getMyWatchlist();
     if(obsFimls.subscribe) {
       obsFimls.subscribe(
@@ -29,8 +29,16 @@ export class WatchLaterPage implements OnInit {
           res.results.forEach(movie => {
             this.vm.filmsService.watcherList.push(movie)
           });
+          if (event) {
+            event.target.complete();
+          }
         }
       )
     }
+  }
+
+  doRefresh(eventRefresh) {
+    this.vm.filmsService.page = 0;
+    this.getWatcherList(eventRefresh);
   }
 }

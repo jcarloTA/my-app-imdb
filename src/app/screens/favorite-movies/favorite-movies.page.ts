@@ -21,7 +21,7 @@ export class FavoriteMoviesPage implements OnInit {
     this.getFavoritesList()
   }
 
-  async getFavoritesList() {
+  async getFavoritesList(event?) {
     let obsFimls:any = await this.vm.filmsService.getMyFavoritesMovies();
     if(obsFimls.subscribe) {
       obsFimls.subscribe(
@@ -29,8 +29,16 @@ export class FavoriteMoviesPage implements OnInit {
           res.results.forEach(movie => {
             this.vm.filmsService.favoriteList.push(movie)
           });
+          if (event) {
+            event.target.complete();
+          }
         }
       )
     }
+  }
+
+  doRefresh(eventRefresh) {
+    this.vm.filmsService.page = 0;
+    this.getFavoritesList(eventRefresh);
   }
 }
