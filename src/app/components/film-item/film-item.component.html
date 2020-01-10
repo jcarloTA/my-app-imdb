@@ -3,23 +3,21 @@
     <ion-icon name="heart-empty" color="dark"></ion-icon>
   </div>
   <div class="img-container">
-    <img src="https://http2.mlstatic.com/posters-alita-battle-angel-2019-42x30-cm-D_NQ_NP_609775-MLA29360398780_022019-F.jpg" />
+    <img [src]="movie.poster_path" />
   </div>
   <ion-card-header>
-    <ion-card-title>Card Title asdf asdfasdfas</ion-card-title>
-    <ion-card-subtitle>2016</ion-card-subtitle>
+    <ion-card-title>{{movie.original_title}}</ion-card-title>
+    <ion-card-subtitle>{{movie.release_date}}</ion-card-subtitle>
 
 
   </ion-card-header>
 
-  <ion-card-content>
+  <ion-card-content height="int%">
     <div class="stars-container">
         <ion-icon name="star" color="warning"></ion-icon>
-        <span>7.5</span>
+        <span>{{movie.vote_average}}</span>
     </div>
-    Keep close to Nature's heart... and break clear away, once in awhile,
-    and climb a mountain or spend a week in the woods. Wash your spirit clean.
-
+    <p>{{movie.overview}}</p>
     <div class="fab-container">
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
             <ion-fab-button>
