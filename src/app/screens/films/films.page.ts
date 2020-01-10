@@ -38,7 +38,9 @@ export class FilmsPage implements OnInit {
         this.vm.filmsService.page = res.page;
         this.vm.filmsService.total_pages = res.total_results;
         this.vm.filmsService.total_pages = res.total_pages;
-        console.log('resolve',res);
+        if(scrollEvent) {
+          scrollEvent.target.complete();
+        }
       }
     ) 
   }

@@ -27,7 +27,7 @@ export class FilmsService {
     private httpService: HttpService,
     private storageService: StorageService
   ) { 
-    this.page = 1;
+    this.page = 0;
     this.moviesList = [];
   }
 
@@ -42,7 +42,7 @@ export class FilmsService {
       } 
     }
 
-    return this.httpService.get('/3/movie/popular',{page: this.page++,language: 'es-GT'})
+    return this.httpService.get('/3/movie/popular',{page: ++this.page,language: 'es-GT'})
     .pipe(
       map( this.mapMovies ),
       retry(1),
