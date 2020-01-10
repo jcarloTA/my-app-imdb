@@ -30,7 +30,7 @@ export class WatchLaterPage implements OnInit {
             this.vm.filmsService.watcherList.push(movie)
           });
           if (event) {
-            event.target.complete();
+            eventRefresh.target.complete();
           }
         }
       )
