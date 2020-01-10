@@ -24,6 +24,7 @@ export class FilmsPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log('init films')
     this.getMoviesList(null,true);
     //this.authService.generateRequestToken()
   }

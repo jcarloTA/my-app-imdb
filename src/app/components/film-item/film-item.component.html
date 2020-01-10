@@ -3,13 +3,11 @@
     <ion-icon name="heart-empty" color="dark"></ion-icon>
   </div>
   <div class="img-container">
-    <img [src]="movie.poster_path" />
+    <img [src]="movie.poster_path" [routerDirection]="'root'" [routerLink]="['/films/details/'+movie.id]"/>
   </div>
   <ion-card-header>
     <ion-card-title>{{movie.original_title}}</ion-card-title>
     <ion-card-subtitle>{{movie.release_date}}</ion-card-subtitle>
-
-
   </ion-card-header>
 
   <ion-card-content height="int%">

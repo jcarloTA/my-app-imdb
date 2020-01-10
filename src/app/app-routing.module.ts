@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
 const routes: Routes = [
   {
     path: '',
@@ -9,7 +8,16 @@ const routes: Routes = [
   },
   {
     path: 'films',
-    loadChildren: () => import('./screens/films/films.module').then( m => m.FilmsPageModule)
+    children:[
+      {
+        path: '',
+        loadChildren: './screens/films/films.module#FilmsPageModule'
+      },
+      {
+        path: 'details/:id',
+        loadChildren: './screens/films-detail/films-detail.module#FilmsDetailPageModule'
+      }
+    ]
   },
   {
     path: 'films-detail',

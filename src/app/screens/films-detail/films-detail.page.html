@@ -1,25 +1,25 @@
 <ion-header no-border>
     <ion-toolbar>
-        
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref='/films'></ion-back-button>
+      </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <div class="cover-page" fullscreen [style.background-image]="'url(https://http2.mlstatic.com/posters-alita-battle-angel-2019-42x30-cm-D_NQ_NP_609775-MLA29360398780_022019-F.jpg)'">
+  <div class="cover-page" fullscreen [style.background-image]="'url('+details.poster_path+')'">
   </div>
   <div class="container-content">
-    <ion-card-title>Card Title asdf asdfasdfas</ion-card-title>
+    <ion-card-title>{{details.title}}</ion-card-title>
     <ion-card-subtitle>
-      2016 
-        <span class="m-l-1">Accion </span>
-        <span>Drama </span>
-        <span>Cultura</span>
+      {{details.release_date}} <br>
+        <span *ngFor="let gener of details.genres">{{gener.name}}, </span>
     </ion-card-subtitle>
     <div class="m-t-p-5 ">
         <ion-icon name="star" color="warning"></ion-icon>
-        <span>7.5</span>
+        <span>{{details.vote_average}}</span>
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus exercitationem itaque ea officia deserunt iste, eligendi explicabo neque fuga officiis, debitis distinctio! Ea tenetur maiores ad hic dicta reiciendis voluptate?</p>
+    <p>{{details.overview}}</p>
     <div class="footer-content">
       <ion-button>
           <ion-icon slot="start" name="add"></ion-icon>

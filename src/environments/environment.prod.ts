@@ -4,5 +4,6 @@ export const environment = {
   API_URL: 'https://api.themoviedb.org/3',
   API_URL_AUTH: 'https://www.themoviedb.org',
   API_URL_IMAGES: 'https://image.tmdb.org',
+  LANGUAGE: 'es-GT',
   TOKEN_DURATION: 60 // In minutes
 };

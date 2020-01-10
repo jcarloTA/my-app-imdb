@@ -42,9 +42,18 @@ export class FilmsService {
       } 
     }
 
-    return this.httpService.get('/3/movie/popular',{page: ++this.page,language: 'es-GT'})
+    return this.httpService.get('/3/movie/popular',{page: ++this.page,language: environment.LANGUAGE})
     .pipe(
       map( this.mapMovies ),
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  getMovieById(id) {
+    return this.httpService.get(`/3/movie/${id}`,{language: environment.LANGUAGE})
+    .pipe(
+      map(this.mapMovie),
       retry(1),
       catchError(this.handleError)
     )
@@ -55,6 +64,13 @@ export class FilmsService {
   }
   set moviesList(movies:Array<Movie>) {
     this._moviesList = movies;
+  }
+
+  mapMovie(movie) {
+    let domainUrl = `${environment.API_URL_IMAGES}/t/p/`;
+    movie.backdrop_path = `${domainUrl}${imagesConfig.backdrop_path.normal}${movie.backdrop_path}`;
+    movie.poster_path = `${domainUrl}${imagesConfig.poster_path.normal}${movie.poster_path}`;
+    return movie;
   }
 
   mapMovies(movies) {
