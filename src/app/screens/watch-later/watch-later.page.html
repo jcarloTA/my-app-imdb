@@ -3,10 +3,16 @@
     <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>watch-later</ion-title>
+    <ion-title>Ver despues</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+      <ion-row>
+        <ion-col size-xs="6" size-sm="3" *ngFor="let movie of vm.filmsService.watcherList">
+            <film-item [movie]="movie"></film-item>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
 </ion-content>

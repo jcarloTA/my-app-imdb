@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FilmsService } from 'src/app/services/films/films.service';
 
 @Component({
   selector: 'app-favorite-movies',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoriteMoviesPage implements OnInit {
 
-  constructor() { }
+  public vm : {
+    filmsService?: FilmsService
+  } = {};
+  constructor(
+    private filmsService: FilmsService
+  ) {
+    this.vm.filmsService = this.filmsService; 
+   }
 
   ngOnInit() {
+    this.getFavoritesList()
   }
 
+  async getFavoritesList() {
+    let obsFimls:any = await this.vm.filmsService.getMyFavoritesMovies();
+    if(obsFimls.subscribe) {
+      obsFimls.subscribe(
+        (res:any) => {
+          res.results.forEach(movie => {
+            this.vm.filmsService.favoriteList.push(movie)
+          });
+        }
+      )
+    }
+  }
 }

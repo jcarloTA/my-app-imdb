@@ -1,6 +1,6 @@
 <ion-card class="fil-item-container">
   <div class="img-container">
-    <img [src]="movie.poster_path" [routerDirection]="'root'" [routerLink]="['/films/details/'+movie.id]"/>
+    <img [src]="movie.poster_path" [routerDirection]="'root'" [routerLink]="['details/'+movie.id]"/>
   </div>
   <ion-card-header>
     <ion-card-title>{{movie.original_title}}</ion-card-title>
@@ -13,20 +13,5 @@
         <span>{{movie.vote_average}}</span>
     </div>
     <p>{{movie.overview}}</p>
-    <div class="fab-container">
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-            <ion-fab-button>
-              <ion-icon name="add"></ion-icon>
-            </ion-fab-button>
-            <ion-fab-list side="top">
-                <div class="custom-fab">
-                  <ion-button>
-                    Agregar para ver despues
-                    <ion-icon name="bookmark"></ion-icon>
-                  </ion-button>
-                </div>
-            </ion-fab-list>
-        </ion-fab>
-      </div>
   </ion-card-content>
 </ion-card>

@@ -20,6 +20,8 @@ interface responseData {
 export class FilmsService {
 
   private _moviesList: Array<Movie>;
+  private _watcherList: Array<Movie>;
+  private _favoriteList: Array<Movie>;
   public page: number;
   public total_results: number;
   public total_pages: number;
@@ -93,6 +95,18 @@ export class FilmsService {
   }
   set moviesList(movies:Array<Movie>) {
     this._moviesList = movies;
+  }
+  get favoriteList() {
+    return this._favoriteList;
+  }
+  set favoriteList(movies:Array<Movie>) {
+    this._favoriteList = movies;
+  }
+  get watcherList() {
+    return this._watcherList;
+  }
+  set watcherList(movies:Array<Movie>) {
+    this._watcherList = movies;
   }
 
   mapMovie(movie) {
