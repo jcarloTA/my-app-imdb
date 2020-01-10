@@ -10,20 +10,10 @@
 }
 
 .fil-item-container {
-    // overflow: visible;
-    max-height: 35em;
-    position: relative;
-    display: flex;
-    flex-direction: column;
+    overflow: visible;
     .img-container {
         width: 100%;
         min-height: 14em;
-    }
-    ion-card-title {
-        font-size: .9rem;
-    }
-    ion-card-content {
-        overflow: hidden;
     }
 }
 

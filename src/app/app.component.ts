@@ -56,7 +56,8 @@ export class AppComponent {
     let reqTokenExpiration = await this.storageService.getItem(storageKeys.reqTokenExpiration);
     let dateToken = await this.storageService.getItem(storageKeys.dateToken);
     let isValidReqToken = await this.storageService.getItem(storageKeys.isValidReqToken);
-    
+
+
     if(isValidReqToken) {
       let difference = new Date().getTime() - new Date(dateToken).getTime();
       let differenceInMinutes = Math.round(difference / 60000);
