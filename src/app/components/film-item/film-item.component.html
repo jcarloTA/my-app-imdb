@@ -1,6 +1,6 @@
 <ion-card class="fil-item-container">
   <div class="img-container">
-    <img [src]="movie.poster_path" expand="full" [routerDirection]="'root'" [routerLink]="['/menu/detail/'+movie.id]"/>
+    <img [src]="movie.poster_path" [routerLink]="['/menu/films/'+movie.id]" routerDirection="forward"/>
   </div>
   <ion-card-header>
     <ion-card-title>{{movie.original_title}}</ion-card-title>
@@ -8,10 +8,6 @@
   </ion-card-header>
 
   <ion-card-content height="int%">
-    <div class="stars-container">
-        <ion-icon name="star" color="warning"></ion-icon>
-        <span>{{movie.vote_average}}</span>
-    </div>
     <p>{{movie.overview}}</p>
   </ion-card-content>
 </ion-card>

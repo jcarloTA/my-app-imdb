@@ -36,6 +36,7 @@ export class MenuPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log('inital menu')
   }
 
 }

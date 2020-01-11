@@ -6,7 +6,16 @@ import { FilmsPage } from './films.page';
 const routes: Routes = [
   {
     path: '',
-    component: FilmsPage,
+    children: [
+      {
+        path: '',
+        component: FilmsPage
+      },
+      {
+        path: 'detail/:id',
+        loadChildren: './../films-detail/films-detail.module#FilmsDetailPageModule'
+      }
+    ]
   }
 ];
 

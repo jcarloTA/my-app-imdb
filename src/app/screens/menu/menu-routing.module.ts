@@ -6,33 +6,38 @@ import { FilmsPage } from '../films/films.page';
 import { FilmsDetailPage } from '../films-detail/films-detail.page';
 import { FavoriteMoviesPage } from '../favorite-movies/favorite-movies.page';
 import { WatchLaterPage } from '../watch-later/watch-later.page';
-
 const routes: Routes = [
   {
-    path: '',
+    path: 'menu',
     component: MenuPage,
     children: [
       {
         path: 'films',
-        component: FilmsPage
+        children: [
+          {
+            path: '',
+            loadChildren: () =>  import('./../films/films.module').then( m => m.FilmsPageModule)
+          },
+          {
+            path: ':id',
+            loadChildren: () =>  import('./../films-detail/films-detail.module').then( m => m.FilmsDetailPageModule)
+          }
+        ]
       },
-      {
-        path: 'detail/:id',
-        component: FilmsDetailPage
-      },
-      {
-        path: 'favorite-movies',
-        component: FavoriteMoviesPage
-      },
-      {
-        path: 'watch-later',
-        component: WatchLaterPage
-      }
+      // {
+      //   path: 'favorite-movies',
+      //   component: FavoriteMoviesPage
+      // },
+      // {
+      //   path: 'watch-later',
+      //   component: WatchLaterPage
+      // }
     ]
   },
   {
     path: '',
-    redirectTo: '/menu/films',
+    redirectTo: 'menu/films',
+    pathMatch: 'full'
   }
 ];
 

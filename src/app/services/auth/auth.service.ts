@@ -25,7 +25,7 @@ export class AuthService {
 
   }
 
-  generateRequestToken() {
+  generateRequestToken(action?) {
     return this.httpService.get('/3/authentication/token/new')
     .subscribe( (res:any) => {
       if (res.success) {
@@ -42,14 +42,17 @@ export class AuthService {
     return this.httpService.post('/3/authentication/session/new',{request_token: this.requestToken})
   }
 
-  getAccount() {
+  getAccount(action?) {
     this.httpService.get('/3/account', {session_id: this.sessionId})
     .subscribe( (res:Account) => {
+      if(typeof action === 'function') {
+        action();
+      }
       this.account = res;
     })
   }
 
-  validateRequestToken() {
+  validateRequestToken(action?) {
     const browser = this.iab.create(`${environment.API_URL_AUTH}/authenticate/${this.requestToken}`);
     browser.on('loadstart').subscribe(event => {
       console.log('loadstart iab', event)
@@ -59,7 +62,7 @@ export class AuthService {
         this.createSessionId().subscribe( (res:any) => {
           if (res.success) {
             this.sessionId = res.session_id;
-            this.getAccount();
+            this.getAccount(action);
           }
         })
       }

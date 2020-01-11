@@ -18,18 +18,18 @@ export class WatchLaterPage implements OnInit {
    }
 
   ngOnInit() {
-    this.getWatcherList();
+    // this.getWatcherList();
   }
 
   async getWatcherList(eventRefresh?) {
-    let obsFimls:any = await this.vm.filmsService.getMyWatchlist();
+    let obsFimls:any = await this.vm.filmsService.getMyWatchlist(this.getWatcherList);
     if(obsFimls.subscribe) {
       obsFimls.subscribe(
         (res:any) => {
           res.results.forEach(movie => {
             this.vm.filmsService.watcherList.push(movie)
           });
-          if (event) {
+          if (eventRefresh && eventRefresh.target) {
             eventRefresh.target.complete();
           }
         }

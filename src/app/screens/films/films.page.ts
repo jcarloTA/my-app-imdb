@@ -25,6 +25,7 @@ export class FilmsPage implements OnInit {
 
   ngOnInit() {
     console.log('init films')
+    this.vm.filmsService.page = 0;
     this.getMoviesList(null,true);
     //this.authService.generateRequestToken()
   }
@@ -39,10 +40,10 @@ export class FilmsPage implements OnInit {
         this.vm.filmsService.page = res.page;
         this.vm.filmsService.total_pages = res.total_results;
         this.vm.filmsService.total_pages = res.total_pages;
-        if(scrollEvent) {
+        if(scrollEvent && scrollEvent.target) {
           scrollEvent.target.complete();
         }
-        if (refresh) {
+        if (refresh && refresh.target) {
           refresh.target.complete();
         }
       }

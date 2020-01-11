@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'menu/films',
-    pathMatch: 'full'
-  },
-  { path: 'menu', loadChildren: './screens/menu/menu.module#MenuPageModule' }
+  { path: '', loadChildren: () => import('./screens/menu/menu.module').then( m => m.MenuPageModule) }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes,{ preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+

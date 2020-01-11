@@ -21,8 +21,9 @@ export class FilmItemComponent implements OnInit {
   ngOnInit() {}
 
   openDetail() {
-    //this.router.navigate(['/films/details'])
-    this.navCtrl.navigateForward('/films/details');
+    // this.router.navigate(['/details'])
+    this.navCtrl.navigateForward(`/details/${this.movie.id}`);
+    // this.navCtrl.push()
 
   }
 

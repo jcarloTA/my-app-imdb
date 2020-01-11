@@ -33,6 +33,8 @@ export class FilmsService {
   ) { 
     this.page = 0;
     this.moviesList = [];
+    this.favoriteList = [];
+    this.watcherList = [];
   }
 
   async getMoviesList(isInitial?) {
@@ -81,14 +83,22 @@ export class FilmsService {
     if(!this.authService.account) {
       return this.authService.generateRequestToken()
     }
-    return this.httpService.get(`/account/${this.authService.account.id}/watchlist/movies`, {session_id: this.authService.sessionId, language: environment.LANGUAGE})
+    return this.httpService.get(`/3/account/${this.authService.account.id}/watchlist/movies`, {session_id: this.authService.sessionId, language: environment.LANGUAGE})
+    .pipe(
+      map( this.mapMovies ),
+      retry(1),
+      catchError(this.handleError));
   }
 
-  getMyWatchlist() {
+  getMyWatchlist(action?) {
     if(!this.authService.account) {
-      return this.authService.generateRequestToken()
+      return this.authService.generateRequestToken(action)
     }
-    return this.httpService.get(`/account/${this.authService.account.id}/favorite/movies`, {session_id: this.authService.sessionId, language: environment.LANGUAGE})
+    return this.httpService.get(`/3/account/${this.authService.account.id}/favorite/movies`, {session_id: this.authService.sessionId, language: environment.LANGUAGE})
+    .pipe(
+      map( this.mapMovies ),
+      retry(1),
+      catchError(this.handleError));
   }
 
   get moviesList() {
