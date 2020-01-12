@@ -19,8 +19,6 @@ export class FilmsDetailPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private filmsService: FilmsService,
     private messagesService: MessagesService,
-    public navCtrl: NavController,
-
   ) {
 
 
@@ -33,7 +31,6 @@ export class FilmsDetailPage implements OnInit {
 
   getDetailsMovie() {
     this.filmsService.getMovieById(this.idMovie).subscribe( res => {
-      console.log('detail',res);
       this.details = res;
       this.getMovieState();
     })
@@ -42,7 +39,6 @@ export class FilmsDetailPage implements OnInit {
   getMovieState() {
     if(this.filmsService.getMovieState(this.details.id).subscribe) {
       this.filmsService.getMovieState(this.details.id).subscribe( res => {
-        console.log('state m',res);
         this.movieState = res;
       })
     }
@@ -56,13 +52,20 @@ export class FilmsDetailPage implements OnInit {
       favorite: favorite
     }
     this.movieState.favorite = favorite
-    this.filmsService.markAsFavorite(body).subscribe((res) => {
-      if(this.movieState.favorite) {
-        this.messagesService.presentToast('Agregado a favoritos')
-      } else {
-        this.messagesService.presentToast('Removido de favoritos')
-      }
-    })
+    return this.filmsService.markAsFavorite(body).subscribe((res:any) => {
+        if(!res.notAuth) {
+          if(this.movieState.favorite) {
+            this.messagesService.presentToast('Agregado a favoritos')
+          } else {
+            this.messagesService.presentToast('Removido de favoritos')
+          }
+          return;
+        }
+        this.movieState.favorite = !favorite
+      }, 
+      err => {
+        this.movieState.favorite = !favorite
+      })
   }
 
   addMyWatchList(watchlist) {
@@ -72,16 +75,19 @@ export class FilmsDetailPage implements OnInit {
       watchlist: watchlist
     }
     this.movieState.watchlist = watchlist;
-    this.filmsService.addMyWatchList(body).subscribe((res) => {
-      if(this.movieState.watchlist) {
-        this.messagesService.presentToast('Agregado a mi lista')
-      } else {
-        this.messagesService.presentToast('Removido de mi lista')
+    this.filmsService.addMyWatchList(body).subscribe((res:any) => {
+      if(!res.notAuth) {
+        if(this.movieState.watchlist) {
+          this.messagesService.presentToast('Agregado a mi lista')
+        } else {
+          this.messagesService.presentToast('Removido de mi lista')
+        }
+        return 
       }
+      this.movieState.watchlist = !watchlist;
+    }, 
+    err => {
+      this.movieState.watchlist = !watchlist;
     })
-  }
-
-  back() {
-    this.navCtrl.back();
   }
 }

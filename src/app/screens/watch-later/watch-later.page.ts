@@ -18,7 +18,7 @@ export class WatchLaterPage implements OnInit {
    }
 
   ngOnInit() {
-    // this.getWatcherList();
+    this.getWatcherList();
   }
 
   async getWatcherList(eventRefresh?) {

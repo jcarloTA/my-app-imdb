@@ -7,6 +7,7 @@ import { StorageService } from '../storage/storage.service';
 import { storageKeys, imagesConfig } from './../../shared/constants'
 import { environment } from './../../../environments/environment'
 import { AuthService } from '../auth/auth.service';
+
 interface responseData {
   page: Number,
   total_results: Number;
@@ -22,6 +23,7 @@ export class FilmsService {
   private _moviesList: Array<Movie>;
   private _watcherList: Array<Movie>;
   private _favoriteList: Array<Movie>;
+  private _searchMoviesList: Array<Movie>;
   public page: number;
   public total_results: number;
   public total_pages: number;
@@ -35,6 +37,7 @@ export class FilmsService {
     this.moviesList = [];
     this.favoriteList = [];
     this.watcherList = [];
+    this.searchMoviesList = [];
   }
 
   async getMoviesList(isInitial?) {
@@ -67,9 +70,17 @@ export class FilmsService {
   }
 
   markAsFavorite(body) {
+    if(!this.authService.account) {
+       this.authService.generateRequestToken();
+       return of({notAuth: true})
+    }
     return this.httpService.post(`/3/account/${this.authService.account.id}/favorite`,body, {session_id: this.authService.sessionId});
   }
   addMyWatchList(body){
+    if(!this.authService.account) {
+      this.authService.generateRequestToken();
+      return of({notAuth: true})
+    }
     return this.httpService.post(`/3/account/${this.authService.account.id}/watchlist`,body, {session_id: this.authService.sessionId});
   }
   getMovieState(movieId) :any {
@@ -101,6 +112,15 @@ export class FilmsService {
       catchError(this.handleError));
   }
 
+  searchMovies(query: String) {
+    return this.httpService.get('/3/search/movie',{language: environment.LANGUAGE, query: query})
+    .pipe(
+      map( this.mapMovies ),
+      retry(1),
+      catchError(this.handleError)
+    ) 
+  }
+
   get moviesList() {
     return this._moviesList;
   }
@@ -118,6 +138,13 @@ export class FilmsService {
   }
   set watcherList(movies:Array<Movie>) {
     this._watcherList = movies;
+  }
+
+  get searchMoviesList() {
+    return this._searchMoviesList;
+  }
+  set searchMoviesList(movies:Array<Movie>) {
+    this._searchMoviesList = movies;
   }
 
   mapMovie(movie) {
@@ -157,7 +184,7 @@ export class FilmsService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    window.alert(errorMessage);
+    // window.alert(errorMessage);
     return throwError(errorMessage);
   }
 }

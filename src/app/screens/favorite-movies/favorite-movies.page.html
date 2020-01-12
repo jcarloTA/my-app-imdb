@@ -13,6 +13,9 @@
       refreshingText="Refrescando ...">
     </ion-refresher-content>
   </ion-refresher>
+  <div class="load-data-spinner" *ngIf="!vm.filmsService.favoriteList.length">
+    <ion-spinner ></ion-spinner>
+  </div>
   <ion-grid>
       <ion-row>
         <ion-col size-xs="6" size-sm="3" *ngFor="let movie of vm.filmsService.favoriteList">

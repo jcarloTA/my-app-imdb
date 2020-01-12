@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar> 
+    <ion-searchbar 
+      #ionSearch
+      animated
+      showCancelButton="always" 
+      cancelButtonText="Cancelar"
+      (ionCancel)="ionCancelSearch()"
+      placeholder="Buscar Peliculas"
+      [(ngModel)]="vm.searchValue"
+      (ionChange)="searchFilms($event)"
+      debounce="500">
+    </ion-searchbar>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+  <div class="load-data-spinner" *ngIf="!vm.filmsService.searchMoviesList.length && vm.isLoading">
+    <ion-spinner ></ion-spinner>
+  </div>
+  <h3 *ngIf="vm.isSearchTouched && !vm.filmsService.searchMoviesList.length && !vm.isLoading" class="not-results">
+    No se encontraron resultados
+  </h3>
+  <ion-grid>
+      <ion-row>
+        <ion-col size-xs="6" size-sm="3" *ngFor="let movie of vm.filmsService.searchMoviesList">
+            <film-item [movie]="movie"></film-item>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content> ̑

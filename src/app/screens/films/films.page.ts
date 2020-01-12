@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { FilmsService } from 'src/app/services/films/films.service';
-import Movie from 'src/app/models/movie.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-films',
@@ -9,25 +8,20 @@ import Movie from 'src/app/models/movie.model';
   styleUrls: ['./films.page.scss'],
 })
 export class FilmsPage implements OnInit {
-
-  props = {
-    activeSearch: false,
-  }
+  
   public vm : {
     filmsService?: FilmsService
   } = {};
 
   constructor( 
-    private authService: AuthService,
+    private router: Router,
     private filmsService: FilmsService) {
     this.vm.filmsService = this.filmsService;  
   }
 
   ngOnInit() {
-    console.log('init films')
     this.vm.filmsService.page = 0;
     this.getMoviesList(null,true);
-    //this.authService.generateRequestToken()
   }
 
   async getMoviesList(scrollEvent,isInitial?, refresh?) {
@@ -51,12 +45,10 @@ export class FilmsPage implements OnInit {
   }
 
   setVisibleSearch() {
-    this.props.activeSearch = !this.props.activeSearch;
+    console.log('nav')
+    this.router.navigate(['/menu/films/search'])
   }
 
-  ionCancelSearch() {
-    this.setVisibleSearch()
-  }
   doRefresh(eventRefresh) {
     this.vm.filmsService.page = 0;
     this.getMoviesList(null, true, eventRefresh);

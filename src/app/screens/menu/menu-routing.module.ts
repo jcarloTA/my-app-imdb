@@ -2,10 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MenuPage } from './menu.page';
-import { FilmsPage } from '../films/films.page';
-import { FilmsDetailPage } from '../films-detail/films-detail.page';
-import { FavoriteMoviesPage } from '../favorite-movies/favorite-movies.page';
-import { WatchLaterPage } from '../watch-later/watch-later.page';
 const routes: Routes = [
   {
     path: 'menu',
@@ -19,19 +15,24 @@ const routes: Routes = [
             loadChildren: () =>  import('./../films/films.module').then( m => m.FilmsPageModule)
           },
           {
-            path: ':id',
+            path: 'detail/:id',
             loadChildren: () =>  import('./../films-detail/films-detail.module').then( m => m.FilmsDetailPageModule)
+          },
+          {
+            path: 'search',
+            loadChildren: () => import('./../search/search.module').then( m => m.SearchPageModule)
           }
         ]
       },
-      // {
-      //   path: 'favorite-movies',
-      //   component: FavoriteMoviesPage
-      // },
-      // {
-      //   path: 'watch-later',
-      //   component: WatchLaterPage
-      // }
+      {
+        path: 'favorite-movies',
+        loadChildren: () =>  import('./../favorite-movies/favorite-movies.module').then( m => m.FavoriteMoviesPageModule)
+      },
+      {
+        path: 'watch-later',
+        loadChildren: () =>  import('./../watch-later/watch-later.module').then( m => m.WatchLaterPageModule)
+
+      }
     ]
   },
   {
