@@ -40,7 +40,7 @@ export class SearchPage implements OnInit, AfterViewInit {
     this.navCtrl.back();
   }
 
-  searchFilms() {
+  searchFilms(event) {
     this.vm.isLoading = true;
     this.vm.isSearchTouched = true;
     if(this.vm.searchValue) {
